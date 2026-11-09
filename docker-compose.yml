@@ -1,0 +1,16 @@
+services:
+  mosquitto:
+    image: eclipse-mosquitto
+    container_name: mosquitto
+    ports:
+      - "1883:1883"
+    volumes:
+      - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
+  collector:
+    build: ./collector
+    container_name: collector
+    depends_on:
+      - mosquitto
+    environment:
+      - MQTT_HOST=mosquitto
+    restart: on-failure
