@@ -14,3 +14,13 @@ services:
     environment:
       - MQTT_HOST=mosquitto
     restart: on-failure
+  classifier:
+    build: ./classifier
+    container_name: classifier
+    depends_on:
+      - mosquitto
+    environment:
+      - MQTT_HOST=mosquitto
+    volumes:
+      - ./classifier/output:/app/output
+    restart: on-failure
