@@ -24,3 +24,13 @@ services:
     volumes:
       - ./classifier/output:/app/output
     restart: on-failure
+  yolo:
+    build: ./yolo
+    container_name: yolo
+    depends_on:
+      - mosquitto
+    environment:
+      - MQTT_HOST=mosquitto
+    volumes:
+      - ./yolo/output:/app/output
+    restart: on-failure
