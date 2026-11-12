@@ -34,3 +34,11 @@ services:
     volumes:
       - ./yolo/output:/app/output
     restart: on-failure
+  decision:
+    build: ./decision
+    container_name: decision
+    depends_on:
+      - mosquitto
+    environment:
+      - MQTT_HOST=mosquitto
+    restart: on-failure
