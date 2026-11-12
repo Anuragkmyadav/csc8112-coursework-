@@ -42,3 +42,13 @@ services:
     environment:
       - MQTT_HOST=mosquitto
     restart: on-failure
+  predictor:
+    build: ./predictor
+    container_name: predictor
+    depends_on:
+      - mosquitto
+    environment:
+      - MQTT_HOST=mosquitto
+    volumes:
+      - ./predictor/output:/app/output
+    restart: "no"
